@@ -1,6 +1,22 @@
 .App {
   text-align: center;
 }
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+  padding: 12px;
+}
+
+.edit-form {
+  max-width: 300px;
+  margin: auto;
+}
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +51,6 @@
   to {
     transform: rotate(360deg);
   }
+
+  
 }
