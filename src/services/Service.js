@@ -20,9 +20,7 @@ const remove = id => {
   return http.delete(`/tasks/${id}`);
 };
 
-const removeAll = () => {
-  return http.delete(`/tasks`);
-};
+
 
 const findByTitle = title => {
   return http.get(`/tasks?title=${title}`);
@@ -34,7 +32,7 @@ const TaskService = {
   create,
   update,
   remove,
-  removeAll,
+  
   findByTitle
 };
 export default TaskService;

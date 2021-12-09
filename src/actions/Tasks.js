@@ -64,20 +64,7 @@ import {
     }
   };
   
-  export const deleteAllTasks= () => async (dispatch) => {
-    try {
-      const res = await TaskService.removeAll();
-  
-      dispatch({
-        type: DELETE_ALL_TASK,
-        payload: res.data,
-      });
-  
-      return Promise.resolve(res.data);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  };
+ 
   
   export const findTaskByTitle = (title) => async (dispatch) => {
     try {

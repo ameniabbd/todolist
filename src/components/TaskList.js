@@ -4,23 +4,25 @@ import { Link } from "react-router-dom";
 import {
   retrieveTask,
   findTaskByTitle,
-  deleteAllTasks,
+  
 } from "../actions/Tasks";
+import * as Icon from "react-bootstrap-icons";
+import "./taskList.styles.css";
 
 const TaskList = () => {
   const [currentTask, setCurrentTask] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
 
-  const tasks = useSelector(state => state.task);
-  console.log(tasks)
+  const tasks = useSelector((state) => state.task);
+  console.log(tasks);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(retrieveTask())
+    dispatch(retrieveTask());
   }, []);
 
-  const onChangeSearchTitle = e => {
+  const onChangeSearchTitle = (e) => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
   };
@@ -35,53 +37,53 @@ const TaskList = () => {
     setCurrentIndex(index);
   };
 
-  const removeAllTask = () => {
-    dispatch(deleteAllTasks())
-      .then(response => {
-        console.log(response);
-        refreshData();
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
   const findByTitle = () => {
     refreshData();
     dispatch(findTaskByTitle(searchTitle));
   };
 
   return (
-    <div className="list row">
-      <div className="col-md-8">
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search by title"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
-          />
-          <div className="input-group-append">
-            <button
-              className="form-control mr-sm-2"
-              type="button"
-              onClick={findByTitle}
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className="container ">
       <div className="col-md-6">
-        <h4>Tasks List</h4>
+        <h1>TODO LIST</h1>
+       
+      </div>
 
-        <ul className="list-group">
+      <div className="d-flex justify-content-center align-items-center ">
+        <input
+          type="text"
+          className="form-control "
+          placeholder="Search by title"
+          value={searchTitle}
+          onChange={onChangeSearchTitle}
+        />
+
+        <button
+          className=" btn btn-info ms-2"
+          type="button"
+          onClick={findByTitle}
+        >
+          Search
+        </button>
+      </div>
+      <div>
+        
+          <Link class=" btn btn-info ms-2 btnAdd" to={"/add"}>Add</Link>
+        
+      </div>
+      <div className="card-header">
+        <h4>Task List</h4>
+       
+      </div>
+     
+      <div class="card">
+        <div class="card-body" className="list-group">
           {tasks &&
             tasks.map((task, index) => (
               <li
                 className={
-                  "list-group-item " + (index === currentIndex ? "active" : "")
+                  "list-group-item d-flex justify-content-between align-items-center  " +
+                  (index === currentIndex ? "active" : "")
                 }
                 onClick={() => setActiveTask(task, index)}
                 key={index}
@@ -89,13 +91,7 @@ const TaskList = () => {
                 {task.title}
               </li>
             ))}
-        </ul>
-
-        <button className="nav-item">
-            <Link to={"/add"} className="nav-link">
-              Add
-            </Link>
-          </button>
+        </div>
       </div>
       <div className="col-md-6">
         {currentTask ? (
@@ -120,10 +116,7 @@ const TaskList = () => {
               {currentTask.published ? "Published" : "Pending"}
             </div>
 
-            <Link
-              to={"/tasks/" + currentTask.id}
-              className="badge badge-warning"
-            >
+            <Link to={"/tasks/" + currentTask.id} className="btn btn-info ms-2">
               Edit
             </Link>
           </div>
@@ -134,6 +127,7 @@ const TaskList = () => {
           </div>
         )}
       </div>
+
      
     </div>
   );

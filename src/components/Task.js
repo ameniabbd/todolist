@@ -46,9 +46,9 @@ const Task = (props) => {
     dispatch(updateTask(currentTask.id, data))
       .then(response => {
         console.log(response);
-
         setCurrentTask({ ...currentTask, published: status });
         setMessage("The status was updated successfully!");
+        props.history.push("/tasks");
       })
       .catch(e => {
         console.log(e);
@@ -59,8 +59,8 @@ const Task = (props) => {
     dispatch(updateTask(currentTask.id, currentTask))
       .then(response => {
         console.log(response);
-
         setMessage("The task was updated successfully!");
+        props.history.push("/tasks");
       })
       .catch(e => {
         console.log(e);
@@ -81,7 +81,7 @@ const Task = (props) => {
     <div>
       {currentTask ? (
         <div className="edit-form">
-          <h4>Task</h4>
+          <h4> Update Task</h4>
           <form>
             <div className="form-group">
               <label htmlFor="title">Title</label>
@@ -116,27 +116,27 @@ const Task = (props) => {
 
           {currentTask.published ? (
             <button
-              className="badge badge-primary mr-2"
+            class="btn btn-secondary "
               onClick={() => updateStatus(false)}
             >
               UnPublish
             </button>
           ) : (
             <button
-              className="badge badge-primary mr-2"
+            class="btn btn-secondary"
               onClick={() => updateStatus(true)}
             >
               Publish
             </button>
           )}
 
-          <button className="badge badge-danger mr-2" onClick={removeTask}>
+          <button class="btn btn-danger" onClick={removeTask}>
             Delete
           </button>
 
           <button
             type="submit"
-            className="badge badge-success"
+            class="btn btn-warning"
             onClick={updateContent}
           >
             Update

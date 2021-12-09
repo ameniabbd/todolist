@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTask } from "../actions/Tasks";
+import { Link } from "react-router-dom";
+import "./taskList.styles.css";
 
 const AddTask = () => {
   const initialTaskState = {
@@ -48,9 +50,9 @@ const AddTask = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newTask}>
-            Add
-          </button>
+        <Link to={"/tasks/" } className="btn btn-info ms-2">
+              Back
+            </Link>
          
 
         </div>
@@ -82,7 +84,7 @@ const AddTask = () => {
             />
           </div>
 
-          <button onClick={saveTask} className="btn btn-success">
+          <button onClick={saveTask} className="btn btn-success btnAdd">
             Submit
           </button>
         </div>
